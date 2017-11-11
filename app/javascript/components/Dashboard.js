@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Balance from "./Balance"
+import Transactions from "./Transactions"
 
 class Dashboard extends React.Component {
 
@@ -8,6 +9,7 @@ class Dashboard extends React.Component {
     return(
       <div>
         <Balance userName="user@example.com" amount="0.00"/>
+        <Transactions/>
       </div>
     )
   }
