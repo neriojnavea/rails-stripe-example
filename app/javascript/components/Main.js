@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Dashboard from "./dashboard"
+import Dashboard from "./Dashboard"
+import ChargeMoney from "./ChargeMoney"
 import {
     BrowserRouter as Router,
     Route,
@@ -26,6 +27,7 @@ class Main extends React.Component {
           </nav>
           <div className="container-fluid">
             <Route exact path="/" component={Dashboard}/>
+            <Route exact path="/charges" component={ChargeMoney}/>
           </div>
         </div>
       </Router>
