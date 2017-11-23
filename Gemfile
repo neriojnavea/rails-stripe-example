@@ -39,6 +39,8 @@ gem "haml-rails", "~> 1.0"
 gem 'devise'
 gem 'react-rails', "~> 2.0"
 gem 'stripe'
+gem 'money-rails', '~>1'
+gem 'pry'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +50,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.6'
   gem 'dotenv-rails'
+  gem "factory_bot_rails", "~> 4.0"
 end
 
 group :development do
