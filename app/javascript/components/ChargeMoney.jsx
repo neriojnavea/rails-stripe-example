@@ -1,10 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Link } from "react-router-dom"
-import { StripeProvider } from 'react-stripe-elements'
+import React from 'react';
+import { StripeProvider } from 'react-stripe-elements';
 import Checkout from './Checkout';
 
-function ChargeMoney({userEmail, amount}) {
+function ChargeMoney() {
   return (
     <div className="row">
       <div className="col-md">
@@ -14,7 +12,7 @@ function ChargeMoney({userEmail, amount}) {
           </div>
           <div className="card-body">
             <div className="row justify-content-center">
-              <div className='col-4'>
+              <div className="col-4">
                 <StripeProvider apiKey="changeMe">
                   <Checkout />
                 </StripeProvider>
@@ -24,9 +22,7 @@ function ChargeMoney({userEmail, amount}) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-ChargeMoney.propTypes = {
-}
-export default ChargeMoney
+export default ChargeMoney;

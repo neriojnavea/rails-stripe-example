@@ -1,22 +1,24 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {injectStripe} from 'react-stripe-elements';
-import CardSection from './CardSection';
 import NumberFormat from 'react-number-format';
+import { injectStripe } from 'react-stripe-elements';
+import axios from 'axios';
+import CardSection from './CardSection';
 
 class Form extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
 
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
-      console.log('Received Stripe token:', token);
-    });
+    // eslint-disable-next-line react/prop-types
+    this.props.stripe.createToken({ name: 'Jenny Rosen' })
+      .then(({ token }) => {
+        axios.post('/charges', { token, amount_cents: this.state.amountCents });
+      });
   }
 
   handleAmountChange = (values) => {
     this.setState({
       amountCents: values.floatValue * 100,
-    })
+    });
   }
 
   render() {
@@ -25,15 +27,15 @@ class Form extends React.Component {
         <div className="form-group">
           <label htmlFor="amount">
             Amount to Charge
+            <NumberFormat
+              id="amount"
+              className="form-control form-control-lg"
+              fixedDecimalScale
+              prefix="$"
+              decimalScale={2}
+              onValueChange={this.handleAmountChange}
+            />
           </label>
-          <NumberFormat 
-            id="amount"
-            className='form-control form-control-lg'
-            fixedDecimalScale
-            prefix="$"
-            decimalScale={2}
-            onValueChange={this.handleAmountChange}
-          />
         </div>
         <CardSection />
         <button className="btn btn-primary mt-4">Pay!</button>
@@ -41,4 +43,5 @@ class Form extends React.Component {
     );
   }
 }
+
 export default injectStripe(Form);

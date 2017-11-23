@@ -1,12 +1,23 @@
 {
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}'",
+    "eslint-fix": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}' --fix",
+    "css-lint": "stylelint 'app/javascript/**/*.scss'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "name": "rails-stripe-example",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
+    "axios": "^0.17.1",
+    "babel-eslint": "^8.0.2",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "4.0.0-beta.2",
     "coffeescript": "1.12.7",
     "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
