@@ -30,17 +30,19 @@ const Main = ({ userEmail }) => (
       </nav>
       <div className="container-fluid">
         <Route exact path="/" render={() => <Dashboard userEmail={userEmail} />} />
-        <Route exact path="/charges" component={ChargeMoney} />
+        <Route
+          exact
+          path="/charges"
+          component={ChargeMoney}
+          formAuthenticityToken={formAuthenticityToken}
+        />
       </div>
     </div>
   </Router>
 );
 
-Main.defaultProps = {
-  userEmail: '',
-};
-
 Main.propTypes = {
-  userEmail: PropTypes.string,
+  userEmail: PropTypes.string.isRequired,
+  formAuthenticityToken: PropTypes.string.isRequired,
 };
 export default Main;

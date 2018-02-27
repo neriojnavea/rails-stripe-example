@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ 
+  authenticated do
+    root 'main#index', as: :authenticated_root 
+  end
+
   root 'main#index'
   get '*path', to: 'main#index'
+
+  resources :charges, only: [:create]
 end

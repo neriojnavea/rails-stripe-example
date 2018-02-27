@@ -8,10 +8,13 @@ class Form extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
 
+    const { formAuthenticityToken } = this.props;
+
     // eslint-disable-next-line react/prop-types
     this.props.stripe.createToken({ name: 'Jenny Rosen' })
       .then(({ token }) => {
-        axios.post('/charges', { token, amount_cents: this.state.amountCents });
+        const data = { token, amount_cents: this.state.amountCents }
+        axios.post('/charges', data, headers: { 'X-CSRF-Token', formAuthenticityToken});
       });
   }
 

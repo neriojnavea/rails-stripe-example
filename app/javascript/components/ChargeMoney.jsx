@@ -2,7 +2,7 @@ import React from 'react';
 import { StripeProvider } from 'react-stripe-elements';
 import Checkout from './Checkout';
 
-function ChargeMoney() {
+function ChargeMoney({ route }) {
   return (
     <div className="row">
       <div className="col-md">
@@ -14,7 +14,7 @@ function ChargeMoney() {
             <div className="row justify-content-center">
               <div className="col-4">
                 <StripeProvider apiKey="changeMe">
-                  <Checkout />
+                  <Checkout formAuthenticityToken={route.formAuthenticityToken}/>
                 </StripeProvider>
               </div>
             </div>
