@@ -14,7 +14,7 @@ class Form extends React.Component {
     this.props.stripe.createToken({ name: 'Jenny Rosen' })
       .then(({ token }) => {
         const data = { token, amount_cents: this.state.amountCents }
-        axios.post('/charges', data, headers: { 'X-CSRF-Token', formAuthenticityToken});
+        //axios.post('/charges', data, headers: { 'X-CSRF-Token': formAuthenticityToken});
       });
   }
 

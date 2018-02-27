@@ -1,6 +1,6 @@
 .row.align-items-center.justify-content-center.mt-5
   .col-md-4.w-25
-    %h2 Wallet Example with Stripe and Rails 
+    %h2 Administrador de Documentos
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
         = f.label :email
@@ -13,7 +13,7 @@
         = f.password_field :password, autocomplete: "off", class: 'form-control'
       - flash.each do |key, value|
         .alert.alert-danger
-          = value 
+          = value
       - if devise_mapping.rememberable?
         .form-check
           %label.form-check-label{ for: 'remember_me' }
