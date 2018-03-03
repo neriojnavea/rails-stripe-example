@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :customer do
+    name "MyString"
+    rif "MyString"
+    email "MyString"
+    address "MyString"
+    phone "MyString"
+  end
   factory :user do
     email 'test@example.com'
     password 'password'
