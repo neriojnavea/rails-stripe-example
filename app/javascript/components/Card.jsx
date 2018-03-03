@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Card = ({title, children}) => (
-  <div className="row">
+  <div className="row mt-2">
     <div className="col-md">
       <div className="card">
         <div className="card-header text-center">

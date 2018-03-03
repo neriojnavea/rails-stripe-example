@@ -3,12 +3,12 @@
     %h2 Administrador de Documentos
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
-        = f.label :email
+        = f.label "Correo Electronico"
         %br/
         = f.email_field :email, autofocus: true, class: 'form-control'
         %small.form-text.text-muted This is an example app so you can use an example email
       .form-group
-        = f.label :password
+        = f.label "Clave"
         %br/
         = f.password_field :password, autocomplete: "off", class: 'form-control'
       - flash.each do |key, value|
@@ -20,5 +20,5 @@
             = f.check_box :remember_me, class: 'form-check-input'
             Remember me
       .actions
-        = f.submit "Log in", class: 'btn btn-primary'
+        = f.submit "Iniciar Sesion", class: 'btn btn-primary'
     = render "devise/shared/links"

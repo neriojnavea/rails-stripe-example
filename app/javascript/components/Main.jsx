@@ -7,11 +7,13 @@ import {
 } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Customers from './Customers';
+import NewCustomer from './Customers/New';
 
 export default class Main extends React.Component {
   render() {
     const customers = [
       {
+        id: 1,
         rif: '23444619',
         name: 'Nerio Navea',
         address: 'La Victoria',
@@ -19,7 +21,7 @@ export default class Main extends React.Component {
         phone: '04125491920',
       },
     ];
-    const { useremail, formAuthenticityToken } = this.props;
+    const { userEmail, formAuthenticityToken } = this.props;
     return (
       <Router>
         <div>
@@ -43,10 +45,14 @@ export default class Main extends React.Component {
           <div className="container-fluid">
             <Route exact path="/" render={() => <Dashboard userEmail={userEmail} />} />
             <Route
-              exact
               path="/customers"
               formAuthenticityToken={formAuthenticityToken}
               render={() => <Customers customers={customers} />}
+            />
+            <Route
+              path="/customers/new"
+              formAuthenticityToken={'aa'}
+              component={NewCustomer}
             />
           </div>
         </div>
