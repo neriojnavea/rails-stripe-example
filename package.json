@@ -14,17 +14,22 @@
     "babel-preset-react": "^6.24.1",
     "bootstrap": "4.0.0-beta.2",
     "coffeescript": "1.12.7",
+    "css-loader": "^0.28.10",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "moment": "^2.21.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-datepicker": "^1.2.2",
     "react-dom": "^16.0.0",
     "react-number-format": "^3.0.2",
     "react-router-dom": "^4.2.2",
+    "react-select": "^1.2.1",
     "react-stripe-elements": "^1.2.0",
-    "react_ujs": "^2.4.1"
+    "react_ujs": "^2.4.1",
+    "style-loader": "^0.20.3"
   },
   "devDependencies": {
     "eslint": "^4.11.0",

@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :document do
+    title "MyString"
+    expiration_date "2018-03-06"
+    customer nil
+    done false
+  end
   factory :customer do
     name "MyString"
     rif "MyString"

@@ -8,20 +8,11 @@ import {
 import Dashboard from './Dashboard';
 import Customers from './Customers';
 import NewCustomer from './Customers/New';
+import Documents from './Documents';
 
 export default class Main extends React.Component {
   render() {
-    const customers = [
-      {
-        id: 1,
-        rif: '23444619',
-        name: 'Nerio Navea',
-        address: 'La Victoria',
-        email: 'nnavea@pit.co.ve',
-        phone: '04125491920',
-      },
-    ];
-    const { userEmail, formAuthenticityToken } = this.props;
+    const { userEmail, formAuthenticityToken, customers, docs } = this.props;
     return (
       <Router>
         <div>
@@ -31,19 +22,24 @@ export default class Main extends React.Component {
               <li className="nav-item active">
                 <Link href="/customers" className="nav-link" to="/customers">
                     Clientes
-                    <span role="img" aria-label="get-money">🏢</span>
+                    <span role="img" aria-label="clientes">🏢</span>
                 </Link>
               </li>
               <li className="nav-item active">
-                <Link href="/" className="nav-link" to="/send">
+                <Link href="/" className="nav-link" to="/documents">
                     Documentos
-                    <span role="img" aria-label="send-money">📑</span>
+                    <span role="img" aria-label="documents">📑</span>
                 </Link>
               </li>
             </ul>
           </nav>
           <div className="container-fluid">
             <Route exact path="/" render={() => <Dashboard userEmail={userEmail} />} />
+            <Route
+              path="/documents"
+              formAuthenticityToken={formAuthenticityToken}
+              render={() => <Documents docs={docs} customers={customers} />}
+            />
             <Route
               path="/customers"
               formAuthenticityToken={formAuthenticityToken}

@@ -4,6 +4,7 @@ import Button from 'components/Button';
 import Card from 'components/Card';
 import HoverableTable from 'components/HoverableTable';
 import Th from 'components/Table/Th';
+import axios from 'axios';
 import CustomerRow from './CustomerRow';
 import New from './New';
 import Edit from './Edit';
@@ -30,18 +31,27 @@ export default class Customers extends React.Component {
     const { currentCustomer } = this.state;
     const customers = this.state.customers.slice();
     const customer = customers.find(customer => customer.id == customerId);
-    customers[customers.indexOf(customer)] = currentCustomer;
-    this.setState({
-      customers,
-      showEditCustomerForm: false,
+    axios.put(`/customers/${customerId}`, {
+      customer: currentCustomer,
+    }).then(() => {
+      customers[customers.indexOf(customer)] = currentCustomer;
+
+      this.setState({
+        customers,
+        showEditCustomerForm: false,
+      });
     });
   }
 
   handleDeleteCustomer = (customer) => {
     const customers = this.state.customers.slice();
-    customers.splice(customers.indexOf(customer), 1);
-    this.setState({
-      customers,
+
+    axios.delete(`/customers/${customer.id}`).then(() => {
+      customers.splice(customers.indexOf(customer), 1);
+
+      this.setState({
+        customers,
+      });
     });
   }
 
@@ -73,12 +83,16 @@ export default class Customers extends React.Component {
   handleSaveCustomer = () => {
     const { currentCustomer } = this.state;
     const customers = this.state.customers.slice();
-    customers.push(currentCustomer)
+    axios.post('./customers', {
+      customer: currentCustomer,
+    }).then(response => {
+      customers.push(response.data.customer);
 
-    this.setState({
-      customers,
-      currentCustomer: {},
-      showCreateCustomerForm: false,
+      this.setState({
+        customers,
+        currentCustomer: {},
+        showCreateCustomerForm: false,
+      });
     });
   }
 
