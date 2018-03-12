@@ -9,7 +9,7 @@ import DatePicker from 'components/Form/DatePicker';
 
 const DocumentForm = ({ onClickCancel, onClickSave, onChangeDocument, doc, customers }) => {
   const handleClickSave = () => onClickSave(doc.id);
-  const customersOptions = customers.map(customer => ({ value: customer, label: customer.name }))
+  const customersOptions = customers.map(customer => ({ value: customer.id, label: customer.name }))
   return (
     <GeneralForm>
       <Input
@@ -24,7 +24,8 @@ const DocumentForm = ({ onClickCancel, onClickSave, onChangeDocument, doc, custo
         options={customersOptions}
         id="customer_id"
         value={doc.customer_id}
-        onChange={() => {}}
+        onChange={onChangeDocument}
+        placeholder="Clientes.."
       />
       <DatePicker
         label="Fecha de vencimiento"
@@ -32,7 +33,7 @@ const DocumentForm = ({ onClickCancel, onClickSave, onChangeDocument, doc, custo
         id="expiration_date"
         value={doc.expiration_date}
         onChange={onChangeDocument}
-        value={doc.rif}
+        value={doc.expiration_date}
       />
       <Button primary text="Guardar" onClick={handleClickSave}/>
       <Button danger text="Cancelar" className="ml-1" onClick={onClickCancel}/>

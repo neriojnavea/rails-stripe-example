@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ReactDatePicker from 'react-datepicker';
 
 const DatePicker = ({ id, placeholder, message, label, type, onChange, value }) => {
-  const onChangeValue = (ev) => {
-    onChange(id, ev.target.value);
+  const onChangeValue = (date) => {
+    onChange(id, date);
   };
   return (
     <div className="form-group">

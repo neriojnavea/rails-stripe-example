@@ -5,6 +5,9 @@ import Card from 'components/Card';
 import HoverableTable from 'components/HoverableTable';
 import Th from 'components/Table/Th';
 import axios from 'axios';
+import {
+  getAllResources,
+} from 'services/ajaxHandler';
 import DocumentRow from './DocumentRow';
 import New from './New';
 import Edit from './Edit';
@@ -13,14 +16,41 @@ import moment from 'moment';
 export default class Documents extends React.Component {
   constructor(props) {
     super(props);
-    const { docs, customers } = this.props;
 
     this.state = {
-      docs,
-      customers,
+      docs: [],
+      customers: [],
       currentDocument: {},
       showCreateDocumentForm: false,
     };
+  }
+
+  componentDidMount() {
+    this.updateDocuments();
+    this.updateCustomers();
+  }
+
+  updateDocuments = () => {
+    axios.get('/api/documents')
+      .then((response) => {
+        this.setState({
+          docs: response.data.documents,
+        });
+      });
+  }
+
+  updateCustomers = () => {
+    axios.get('/api/customers')
+      .then((response) => {
+        this.setState({
+          customers: response.data.customers,
+        });
+      });
+  }
+
+  handleClickDoneDocument = (docId, value) => {
+    axios.put(`/api/documents/${docId}`, { done: value })
+      .then(() => this.updateDocuments())
   }
 
   handleCancelEditDocumentForm = () => {
@@ -83,10 +113,13 @@ export default class Documents extends React.Component {
   }
 
   handleSaveDocument = () => {
-    const { currentDocument } = this.state;
-    const docs = this.state.documents.slice();
+    const currentDocument = Object.assign({}, this.state.currentDocument);
+    currentDocument.customer_id = currentDocument.customer_id.value;
+    currentDocument.expiration_date = currentDocument.expiration_date.format();
+    const docs = this.state.docs.slice();
+
     axios.post('./documents', {
-      doc: currentDocument,
+      document: currentDocument,
     }).then(response => {
       docs.push(response.data.document);
 
@@ -133,6 +166,8 @@ export default class Documents extends React.Component {
               {docs.map(document =>
                 <DocumentRow
                   doc={document}
+                  customers={customers}
+                  onClickDoneDocument={this.handleClickDoneDocument}
                   onClickEditDocument={this.handleEditDocument}
                   onClickDeleteDocument={this.handleDeleteDocument}
                 />)}

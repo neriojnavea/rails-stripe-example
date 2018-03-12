@@ -1,5 +1,9 @@
-class DocumentsController < ApplicationController
+class Api::DocumentsController < ApplicationController
   skip_before_action :verify_authenticity_token
+
+  def index
+    render json: { documents: Document.all }, status: 200
+  end
 
   def create
     document = Document.create!(document_params)
@@ -22,6 +26,6 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(%i(date expiration_date customer_id))
+    params.require(:document).permit(%i(title date expiration_date customer_id done))
   end
 end

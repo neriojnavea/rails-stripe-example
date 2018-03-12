@@ -1,5 +1,9 @@
-class CustomersController < ApplicationController
+class Api::CustomersController < ApplicationController
   skip_before_action :verify_authenticity_token
+
+  def index
+    render json: { customers: Customer.all }, status: 200
+  end
 
   def create
     customer = Customer.create!(customer_params)
