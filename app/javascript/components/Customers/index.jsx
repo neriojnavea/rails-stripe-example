@@ -31,7 +31,7 @@ export default class Customers extends React.Component {
     const { currentCustomer } = this.state;
     const customers = this.state.customers.slice();
     const customer = customers.find(customer => customer.id == customerId);
-    axios.put(`/customers/${customerId}`, {
+    axios.put(`/api/customers/${customerId}`, {
       customer: currentCustomer,
     }).then(() => {
       customers[customers.indexOf(customer)] = currentCustomer;
@@ -46,7 +46,7 @@ export default class Customers extends React.Component {
   handleDeleteCustomer = (customer) => {
     const customers = this.state.customers.slice();
 
-    axios.delete(`/customers/${customer.id}`).then(() => {
+    axios.delete(`/api/customers/${customer.id}`).then(() => {
       customers.splice(customers.indexOf(customer), 1);
 
       this.setState({
@@ -83,7 +83,7 @@ export default class Customers extends React.Component {
   handleSaveCustomer = () => {
     const { currentCustomer } = this.state;
     const customers = this.state.customers.slice();
-    axios.post('./customers', {
+    axios.post('/api/customers', {
       customer: currentCustomer,
     }).then(response => {
       customers.push(response.data.customer);

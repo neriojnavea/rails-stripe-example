@@ -63,7 +63,7 @@ export default class Documents extends React.Component {
     const { currentDocument } = this.state;
     const docs = this.state.documents.slice();
     const doc = documents.find(document => document.id == documentId);
-    axios.put(`/docs/${documentId}`, {
+    axios.put(`/api/docs/${documentId}`, {
       doc: currentDocument,
     }).then(() => {
       docs[documents.indexOf(document)] = currentDocument;
@@ -78,7 +78,7 @@ export default class Documents extends React.Component {
   handleDeleteDocument = (doc) => {
     const docs = this.state.documents.slice();
 
-    axios.delete(`/docs/${document.id}`).then(() => {
+    axios.delete(`/api/docs/${document.id}`).then(() => {
       docs.splice(documents.indexOf(document), 1);
 
       this.setState({
@@ -118,7 +118,7 @@ export default class Documents extends React.Component {
     currentDocument.expiration_date = currentDocument.expiration_date.format();
     const docs = this.state.docs.slice();
 
-    axios.post('./documents', {
+    axios.post('/api/documents', {
       document: currentDocument,
     }).then(response => {
       docs.push(response.data.document);
