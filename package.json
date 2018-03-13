@@ -3,7 +3,9 @@
     "eslint": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}'",
     "eslint-fix": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}' --fix",
     "css-lint": "stylelint 'app/javascript/**/*.scss'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
+    "heroku-postbuild": "npm run webpack:deploy"
   },
   "name": "rails-stripe-example",
   "private": true,
