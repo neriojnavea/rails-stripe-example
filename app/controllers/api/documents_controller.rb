@@ -2,16 +2,20 @@ class Api::DocumentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: { documents: Document.all }, status: 200
+    render json: { documents: Document.all.order(done: :asc) }, status: 200
   end
 
   def create
     document = Document.create!(document_params)
+    Documents::NotifyCreation.call(document)
     render json: { document: document }, status: :created
   end
 
   def update
     document = Document.find(params[:id])
+    if document.done == false && document_params[:done] == true
+      Documents::NotifyDone.call(document)
+    end
     if document.update(document_params)
       render json: { document: document }, status: :ok
     else

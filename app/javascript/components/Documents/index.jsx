@@ -76,14 +76,8 @@ export default class Documents extends React.Component {
   }
 
   handleDeleteDocument = (doc) => {
-    const docs = this.state.documents.slice();
-
-    axios.delete(`/api/docs/${document.id}`).then(() => {
-      docs.splice(documents.indexOf(document), 1);
-
-      this.setState({
-        docs,
-      });
+    axios.delete(`/api/documents/${doc.id}`).then(() => {
+      this.updateDocuments();
     });
   }
 
@@ -160,6 +154,8 @@ export default class Documents extends React.Component {
                 <Th>Fecha de Expiracion</Th>
                 <Th>Cliente</Th>
                 <Th>Realizado</Th>
+                <Th>Acciones</Th>
+                <Th></Th>
               </tr>
             </thead>
             <tbody>

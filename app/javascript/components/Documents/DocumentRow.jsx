@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Button';
 import NumberFormat from 'react-number-format';
+import moment from 'moment';
 
 const DocumentRow = ({doc, onClickDeleteDocument, onClickEditDocument, customers,
   onClickDoneDocument}) => {
@@ -16,11 +17,34 @@ const DocumentRow = ({doc, onClickDeleteDocument, onClickEditDocument, customers
     }
     return (
       <tr>
-        <td>{doc.title}</td>
+        <td>
+          {doc.title}
+        </td>
         <td>{doc.expiration_date}</td>
         <td>{customerName(doc.customer_id)}</td>
         <td>
           <input type='checkbox' checked={doc.done} onChange={handleClickDoneDocument} />
+          { moment(doc.expiration_date).isBefore(moment()) && !doc.done &&
+              <span className="badge badge-danger ml-1">
+                Expirado
+              </span> }
+          { doc.done &&
+              <span className="badge badge-success ml-1">
+                Realizado
+              </span> }
+          { !moment(doc.expiration_date).isBefore(moment()) && !doc.done &&
+              <span className="badge badge-warning ml-1">
+                Pendiente
+              </span> }
+        </td>
+        <td>
+          <Button
+            text="Eliminar"
+            small
+            outlineSecundary
+            className="ml-1"
+            onClick={onClickDelete}
+          />
         </td>
       </tr>
     )

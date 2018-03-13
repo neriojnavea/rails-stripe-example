@@ -5,8 +5,6 @@ import Transactions from './Transactions';
 
 const Dashboard = ({ userEmail }) => (
   <div>
-    <Balance userName={userEmail} amount="0.00" />
-    <Transactions />
   </div>
 );
 
