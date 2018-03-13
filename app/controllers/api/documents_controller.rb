@@ -2,7 +2,7 @@ class Api::DocumentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: { documents: Document.all.order(done: :asc) }, status: 200
+    render json: { documents: Document.all.order(expiration_date: :asc) }, status: 200
   end
 
   def create

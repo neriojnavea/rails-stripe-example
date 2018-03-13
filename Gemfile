@@ -44,6 +44,7 @@ gem 'react-rails', "~> 2.0"
 gem 'stripe'
 gem 'money-rails', '~>1'
 gem 'pry'
+gem 'rtedexis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
