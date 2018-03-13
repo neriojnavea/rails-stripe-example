@@ -1,14 +1,13 @@
 {
   "engines": {
-    "node": "8.9.1"
+    "node": "8.9.1",
+    "yarn": "1.2.0"
   },
   "scripts": {
     "eslint": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}'",
     "eslint-fix": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}' --fix",
     "css-lint": "stylelint 'app/javascript/**/*.scss'",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
-    "heroku-postbuild": "npm run webpack:deploy"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "name": "rails-stripe-example",
   "private": true,
