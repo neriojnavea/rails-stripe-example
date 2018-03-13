@@ -9,6 +9,7 @@ const Button = ({ text, onClick, small, primary, className, outlineSecundary, hr
   outlineSecundary && classes.push('btn-outline-secondary');
   return (
     <a
+      href="#"
       className={`btn ${classes.join(' ')} ${className}`}
       onClick={onClick}
     >
