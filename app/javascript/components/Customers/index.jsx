@@ -15,10 +15,23 @@ export default class Customers extends React.Component {
     const { customers } = this.props;
 
     this.state = {
-      customers,
+      customers: [],
       currentCustomer: {},
       showCreateCustomerForm: false,
     };
+  }
+
+  componentDidMount() {
+    this.updateCustomers();
+  }
+
+  updateCustomers = () => {
+    axios.get('/api/customers')
+      .then((response) => {
+        this.setState({
+          customers: response.data.customers,
+        });
+      });
   }
 
   handleCancelEditCustomerForm = () => {
@@ -27,6 +40,7 @@ export default class Customers extends React.Component {
     })
   }
 
+
   handleSaveEditCustomer = (customerId) => {
     const { currentCustomer } = this.state;
     const customers = this.state.customers.slice();
@@ -34,12 +48,10 @@ export default class Customers extends React.Component {
     axios.put(`/api/customers/${customerId}`, {
       customer: currentCustomer,
     }).then(() => {
-      customers[customers.indexOf(customer)] = currentCustomer;
-
       this.setState({
-        customers,
         showEditCustomerForm: false,
       });
+      this.updateCustomers();
     });
   }
 
@@ -47,11 +59,7 @@ export default class Customers extends React.Component {
     const customers = this.state.customers.slice();
 
     axios.delete(`/api/customers/${customer.id}`).then(() => {
-      customers.splice(customers.indexOf(customer), 1);
-
-      this.setState({
-        customers,
-      });
+      this.updateCustomers();
     });
   }
 
@@ -86,10 +94,9 @@ export default class Customers extends React.Component {
     axios.post('/api/customers', {
       customer: currentCustomer,
     }).then(response => {
-      customers.push(response.data.customer);
+      this.updateCustomers();
 
       this.setState({
-        customers,
         currentCustomer: {},
         showCreateCustomerForm: false,
       });
