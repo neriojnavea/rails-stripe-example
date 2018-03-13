@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "8.9.1"
+  },
   "scripts": {
     "eslint": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}'",
     "eslint-fix": "./node_modules/.bin/eslint 'app/javascript/**/*.{js,jsx}' --fix",
