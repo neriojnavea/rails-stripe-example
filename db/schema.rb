@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180307005128) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "charges", force: :cascade do |t|
     t.integer "amount_cents"
     t.string "gateway_id"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "gateway"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180307005128) do
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.date "expiration_date"
-    t.integer "customer_id"
+    t.bigint "customer_id"
     t.boolean "done"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,4 +63,6 @@ ActiveRecord::Schema.define(version: 20180307005128) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "charges", "users"
+  add_foreign_key "documents", "customers"
 end
