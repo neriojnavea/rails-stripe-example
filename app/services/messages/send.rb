@@ -1,4 +1,4 @@
-class SMS::Send
+class Messages::Send
   def self.call(to:, message:)
     if(to[0] == '0')
       fixed_phone = to[1..10]

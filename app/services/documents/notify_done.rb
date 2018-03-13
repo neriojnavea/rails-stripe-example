@@ -4,7 +4,7 @@ class Documents::NotifyDone
       Rails.application.executor.wrap do
         message =
           "Saludos, #{document.customer.name}. #{Company.name} le informa que el documento #{document.title} esta listo"
-        SMS::Send.call(to: document.customer.phone, message: message)
+        Messages::Send.call(to: document.customer.phone, message: message)
       end
     end
   end
