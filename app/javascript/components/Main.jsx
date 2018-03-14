@@ -5,12 +5,20 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import axios from 'axios';
 import Dashboard from './Dashboard';
 import Customers from './Customers';
 import NewCustomer from './Customers/New';
 import Documents from './Documents';
 
 export default class Main extends React.Component {
+  handleLogOut = () => {
+    const { formAuthenticityToken } = this.props;
+    axios.delete(`/users/sign_out`)
+      .then(() => window.location = '/users/sign_in')
+      .catch(() => window.location = '/users/sign_in')
+  }
+
   render() {
     const { userEmail, formAuthenticityToken, customers, docs } = this.props;
     return (
@@ -30,6 +38,11 @@ export default class Main extends React.Component {
                     Documentos
                     <span role="img" aria-label="documents">📑</span>
                 </Link>
+              </li>
+            </ul>
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="#" onClick={this.handleLogOut}>Cerrar sesion</a>
               </li>
             </ul>
           </nav>
