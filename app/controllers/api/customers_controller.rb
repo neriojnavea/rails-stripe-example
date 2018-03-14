@@ -1,6 +1,4 @@
 class Api::CustomersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def index
     render json: { customers: Customer.all }, status: 200
   end
