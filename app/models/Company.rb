@@ -1,5 +1,5 @@
 class Company
   def self.name
-    "AyC"
+    "Mendez Amaya & Asociados, S.C."
   end
 end
