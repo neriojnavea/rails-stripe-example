@@ -113,16 +113,19 @@ export default class Customers extends React.Component {
   }
 
   render() {
+    const { user } = this.props;
     const { customers, showCreateCustomerForm, currentCustomer, showEditCustomerForm } = this.state;
     return (
       <div>
         <Card title="Clientes">
           <div className="col-md">
-            <Button
-              text="+ Cliente"
-              primary
-              onClick={this.handleAddCustomerClick}
-            />
+            { user.role == "admin" &&
+                <Button
+                  text="+ Cliente"
+                  primary
+                  onClick={this.handleAddCustomerClick}
+                />
+            }
           </div>
           <HoverableTable className="mt-4">
             <thead>
@@ -132,7 +135,9 @@ export default class Customers extends React.Component {
                 <Th>Direccion</Th>
                 <Th>Correo</Th>
                 <Th>Celular</Th>
-                <Th>Accion</Th>
+                { user.role == "admin" &&
+                    <Th>Accion</Th>
+                }
               </tr>
             </thead>
             <tbody>
@@ -141,6 +146,7 @@ export default class Customers extends React.Component {
                   customer={customer}
                   onClickEditCustomer={this.handleEditCustomer}
                   onClickDeleteCustomer={this.handleDeleteCustomer}
+                  user={user}
                 />)}
             </tbody>
           </HoverableTable>

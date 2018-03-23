@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'components/Button';
 import NumberFormat from 'react-number-format';
 
-const CustomerRow = ({customer, onClickDeleteCustomer, onClickEditCustomer}) => {
+const CustomerRow = ({ user, customer, onClickDeleteCustomer, onClickEditCustomer}) => {
   const onClickDelete = () => onClickDeleteCustomer(customer);
   const onClickEdit = () => onClickEditCustomer(customer);
   return (
@@ -20,20 +20,24 @@ const CustomerRow = ({customer, onClickDeleteCustomer, onClickEditCustomer}) => 
         />
       </td>
       <td>
-        <Button
-          text="Editar"
-          small
-          outlineSecundary
-          className="ml-1"
-          onClick={onClickEdit}
-        />
-        <Button
-          text="Eliminar"
-          small
-          outlineSecundary
-          className="ml-1"
-          onClick={onClickDelete}
-        />
+        { user.role == "admin" &&
+            <Button
+              text="Editar"
+              small
+              outlineSecundary
+              className="ml-1"
+              onClick={onClickEdit}
+            />
+        }
+        { user.role == "admin" &&
+            <Button
+              text="Eliminar"
+              small
+              outlineSecundary
+              className="ml-1"
+              onClick={onClickDelete}
+            />
+        }
       </td>
     </tr>
   )

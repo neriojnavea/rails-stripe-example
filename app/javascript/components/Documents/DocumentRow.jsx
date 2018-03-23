@@ -5,7 +5,7 @@ import NumberFormat from 'react-number-format';
 import moment from 'moment';
 
 const DocumentRow = ({doc, onClickDeleteDocument, onClickEditDocument, customers,
-  onClickDoneDocument}) => {
+  onClickDoneDocument, user}) => {
     const onClickDelete = () => onClickDeleteDocument(doc);
     const onClickEdit = () => onClickEditDocument(doc);
     const customerName = (customerId) => {
@@ -23,7 +23,9 @@ const DocumentRow = ({doc, onClickDeleteDocument, onClickEditDocument, customers
         <td>{doc.expiration_date}</td>
         <td>{customerName(doc.customer_id)}</td>
         <td>
-          <input type='checkbox' checked={doc.done} onChange={handleClickDoneDocument} />
+          { user.role == "admin" &&
+              <input type='checkbox' checked={doc.done} onChange={handleClickDoneDocument} />
+          }
           { moment(doc.expiration_date).isBefore(moment()) && !doc.done &&
               <span className="badge badge-danger ml-1">
                 Expirado
@@ -38,13 +40,15 @@ const DocumentRow = ({doc, onClickDeleteDocument, onClickEditDocument, customers
               </span> }
         </td>
         <td>
-          <Button
-            text="Eliminar"
-            small
-            outlineSecundary
-            className="ml-1"
-            onClick={onClickDelete}
-          />
+          { user.role == "admin" &&
+              <Button
+                text="Eliminar"
+                small
+                outlineSecundary
+                className="ml-1"
+                onClick={onClickDelete}
+              />
+          }
         </td>
       </tr>
     )

@@ -135,17 +135,20 @@ export default class Documents extends React.Component {
   }
 
   render() {
+    const { user } = this.props;
     const { customers, docs, showCreateDocumentForm, currentDocument,
       showEditDocumentForm } = this.state;
     return (
       <div>
         <Card title="Documetos">
           <div className="col-md">
-            <Button
-              text="+ Documento"
-              primary
-              onClick={this.handleAddDocumentClick}
-            />
+            { user.role == "admin" &&
+                <Button
+                  text="+ Documento"
+                  primary
+                  onClick={this.handleAddDocumentClick}
+                />
+            }
           </div>
           <HoverableTable className="mt-4">
             <thead>
@@ -153,9 +156,15 @@ export default class Documents extends React.Component {
                 <Th>Titulo</Th>
                 <Th>Fecha de Expiracion</Th>
                 <Th>Cliente</Th>
-                <Th>Realizado</Th>
-                <Th>Acciones</Th>
-                <Th></Th>
+                { user.role == "admin" &&
+                    <Th>Realizado</Th>
+                }
+                { user.role != "admin" &&
+                    <Th>Estado</Th>
+                }
+                { user.role == "admin" &&
+                    <Th>Acciones</Th>
+                }
               </tr>
             </thead>
             <tbody>
@@ -166,6 +175,7 @@ export default class Documents extends React.Component {
                   onClickDoneDocument={this.handleClickDoneDocument}
                   onClickEditDocument={this.handleEditDocument}
                   onClickDeleteDocument={this.handleDeleteDocument}
+                  user={user}
                 />)}
             </tbody>
           </HoverableTable>

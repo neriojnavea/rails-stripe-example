@@ -20,7 +20,7 @@ export default class Main extends React.Component {
   }
 
   render() {
-    const { userEmail, formAuthenticityToken, customers, docs } = this.props;
+    const { userEmail, formAuthenticityToken, customers, docs, user } = this.props;
     return (
       <Router>
         <div>
@@ -51,12 +51,12 @@ export default class Main extends React.Component {
             <Route
               path="/documents"
               formAuthenticityToken={formAuthenticityToken}
-              render={() => <Documents docs={docs} customers={customers} />}
+              render={() => <Documents docs={docs} customers={customers} user={user} />}
             />
             <Route
               path="/customers"
               formAuthenticityToken={formAuthenticityToken}
-              render={() => <Customers customers={customers} />}
+              render={() => <Customers customers={customers} user={user}/>}
             />
             <Route
               path="/customers/new"
