@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import GeneralForm from 'components/Form';
 import EmailInput from 'components/Form/EmailInput';
 import Input from 'components/Form/Input';
+import PhoneInput from 'components/Form/PhoneInput';
+import IdInput from 'components/Form/IdInput';
 import Button from 'components/Button';
 
 const CustomerForm = ({ onClickCancel, onClickSave, onChangeCustomer, customer }) => {
   const handleClickSave = () => onClickSave(customer.id);
   return (
     <GeneralForm>
-      <Input
+      <IdInput
         label="Cedula/Rif"
         placeholder="Nombre del cliente"
         id="rif"
@@ -37,7 +39,7 @@ const CustomerForm = ({ onClickCancel, onClickSave, onChangeCustomer, customer }
         onChange={onChangeCustomer}
         value={customer.email}
       />
-      <Input
+      <PhoneInput
         label="Celular"
         placeholder="Celular del cliente"
         id="phone"
